@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A modern password strength checker with scoring, feedback, entropy, crack time, and password generation." />
+    <title>Password Strength Checker</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="common-passwords.js"></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-badge" aria-hidden="true">🔐</div>
+        <div>
+          <p class="eyebrow">Cybersecurity Mini Project</p>
+          <h1>Password Strength Checker</h1>
+          <p class="subtitle">Evaluate passwords, estimate cracking difficulty, and generate stronger credentials.</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#analyzer">Analyzer</a>
+          <a href="#generator">Generator</a>
+        </nav>
+        <button id="themeToggle" class="icon-button" type="button" aria-label="Toggle color theme">🌙</button>
+      </div>
+    </header>
+
+    <main class="main-layout">
+      <section class="card" id="analyzer" aria-labelledby="analyzer-title">
+        <div class="card-heading">
+          <div>
+            <p class="eyebrow">Secure Input</p>
+            <h2 id="analyzer-title">Password Analyzer</h2>
+          </div>
+          <span class="status-pill">Live Feedback</span>
+        </div>
+
+        <div class="input-block">
+          <label class="field-label" for="password">Enter a password</label>
+          <div class="input-row">
+            <input id="password" name="password" type="password" autocomplete="new-password" spellcheck="false" placeholder="Type or paste a password" />
+            <button id="togglePassword" class="icon-button" type="button" aria-label="Show password">👁️</button>
+            <button id="clearButton" class="icon-button" type="button" aria-label="Clear password">✕</button>
+          </div>
+          <div class="actions-row">
+            <button id="checkButton" class="primary-btn" type="button">Check Strength</button>
+            <p id="liveHint" class="microcopy">Real-time analysis is running.</p>
+          </div>
+        </div>
+
+        <section class="panel result-panel" aria-live="polite">
+          <div class="result-head">
+            <div>
+              <p class="eyebrow">Strength Report</p>
+              <h3 id="strengthLabel">Very Weak</h3>
+            </div>
+            <div id="scoreValue" class="score-badge">0%</div>
+          </div>
+
+          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div id="strengthBar" class="progress-fill"></div>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card">
+              <span>Entropy</span>
+              <strong id="entropyValue">0 bits</strong>
+            </article>
+            <article class="stat-card">
+              <span>Crack Time</span>
+              <strong id="crackTimeValue">Instantly</strong>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel feedback-panel" aria-labelledby="feedback-title">
+          <div class="panel-heading">
+            <h3 id="feedback-title">Password Checks</h3>
+            <span class="panel-note">Detailed feedback</span>
+          </div>
+          <ul id="feedbackList" class="feedback-list" role="list"></ul>
+          <div class="suggestions-block">
+            <h4>Suggestions</h4>
+            <ul id="suggestionsList" class="suggestions-list" role="list"></ul>
+          </div>
+        </section>
+      </section>
+
+      <aside class="card generator-card" id="generator" aria-labelledby="generator-title">
+        <div class="card-heading">
+          <div>
+            <p class="eyebrow">Secure Generator</p>
+            <h2 id="generator-title">Create a Strong Password</h2>
+          </div>
+          <button id="copyButton" class="ghost-btn" type="button">Copy</button>
+        </div>
+
+        <div class="generator-controls">
+          <label class="field-label" for="lengthRange">Length: <span id="lengthValue">16</span></label>
+          <input id="lengthRange" type="range" min="8" max="32" value="16" />
+
+          <div class="checkbox-grid" role="group" aria-label="Password options">
+            <label><input type="checkbox" id="useUppercase" checked /> Uppercase</label>
+            <label><input type="checkbox" id="useLowercase" checked /> Lowercase</label>
+            <label><input type="checkbox" id="useNumbers" checked /> Numbers</label>
+            <label><input type="checkbox" id="useSymbols" checked /> Symbols</label>
+          </div>
+
+          <div class="generator-actions">
+            <button id="generateButton" class="primary-btn" type="button">Generate Password</button>
+          </div>
+        </div>
+
+        <div class="generated-output">
+          <label class="field-label" for="generatedPassword">Generated password</label>
+          <input id="generatedPassword" type="text" readonly aria-label="Generated password" />
+        </div>
+
+        <div class="history-panel">
+          <div class="panel-heading">
+            <h3>Recent Passwords</h3>
+            <button id="clearHistoryButton" class="ghost-btn small" type="button">Clear</button>
+          </div>
+          <ul id="historyList" class="history-list" role="list"></ul>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Password Strength Checker. Built with HTML, CSS, and Vanilla JavaScript.</p>
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
