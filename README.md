@@ -44,7 +44,7 @@ If you prefer a local server, you can run:
 python -m http.server 8000
 ```
 
-Then open http://localhost:8000 in your browser.
+Then open C:\Users\denis_dm9cy82\OneDrive\Documents\password checker\password-strength-checker\index.html in your browser.
 
 ## Screenshots
 Placeholder for screenshots:
